@@ -263,7 +263,7 @@
         }
         Array.prototype.forEach.call(nav.querySelectorAll('a'), function (link) {
           if (link === active) {
-            link.setAttribute('aria-current', 'true');
+            link.setAttribute('aria-current', 'location');
           } else {
             link.removeAttribute('aria-current');
           }

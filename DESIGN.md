@@ -54,10 +54,12 @@
 
 ## Типографика
 
-Системные стеки, внешние шрифты не подключаем (офлайн-работа, приватность).
+Локальные self-hosted шрифты (`assets/fonts/`, woff2, кириллица+латиница,
+`font-display:swap`, подключаются через `@import` в начале `styles.css`).
+Внешние CDN не используются.
 
-- Sans (заголовки, текст): `"Helvetica Neue", Arial, "Segoe UI", sans-serif`.
-- Mono (подписи, кнопки, кикеры): `"PT Mono", "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace`.
+- Sans (заголовки, текст): **Manrope** (variable 200–800) → fallback `"Helvetica Neue", Arial, sans-serif`.
+- Mono (подписи, кнопки, кикеры): **JetBrains Mono** (400, 700) → fallback `"PT Mono", "Courier New", monospace`.
 
 Шкала:
 
@@ -70,6 +72,7 @@
 | Кнопки | 700 13px mono, uppercase, ls .08em |
 | Пилюли-элементы | 13px mono, uppercase, ls .05em, lh 1.55 |
 | Подписи фигур | 10px mono, uppercase, ls .1em |
+| Длинные тексты (learning-columns) | sans 14.5px, lh 1.7, обычный регистр — uppercase mono только для коротких подписей |
 
 ## Отступы и сетка
 
@@ -93,7 +96,9 @@
 - `.gif-toggle` — пауза/запуск GIF (стеклянный круг 46px, иконки на чистом CSS, `aria-pressed`).
 - `dialog#link-notice` — уведомление о незаполненной ссылке; закрытие кнопкой, Escape, кликом по подложке.
 - `.to-top` — плавающая кнопка «наверх» после 600px скролла (только под `.js`).
-- Декор: `.blob` (только hero/edu), `.materials-arrow`, `.materials-squiggle`, `.contact-squiggle` — `aria-hidden`, не добавлять новых.
+- Декор: только `.blob` (hero/edu), `aria-hidden`. Рукописные линии/стрелки не используем.
+
+- Пилюли-элементы: `text-shadow: 0 1px 8px rgba(5,20,45,.5)` для контраста белого текста; на ярко-синей секции программы — затемнённое стекло `rgba(9,30,66,.42)`.
 
 ## Состояния (обязательны)
 
