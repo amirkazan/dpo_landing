@@ -67,12 +67,13 @@
 | --- | --- |
 | `.display` (H2 секций) | 300, `clamp(40px,5.6vw,84px)`, lh 1.06, ls −.03em |
 | H1 hero | 600, `clamp(28px,2.6vw,40px)`, lh 1.18 |
-| `.mono` | 13px, lh 1.75 |
-| `.mono-label` / кикеры | 11px, uppercase, ls .14em, цвет `#8fb4dd` |
-| Кнопки | 700 13px mono, uppercase, ls .08em |
-| Пилюли-элементы | 13px mono, uppercase, ls .05em, lh 1.55 |
-| Подписи фигур | 10px mono, uppercase, ls .1em |
-| Длинные тексты (learning-columns) | sans 14.5px, lh 1.7, обычный регистр — uppercase mono только для коротких подписей |
+| `.mono` | 15px, lh 1.75 |
+| `.mono-label` / кикеры | 12.5px, uppercase, ls .14em, цвет `#8fb4dd` |
+| Кнопки | 700 14px mono, uppercase, ls .08em |
+| Пилюли-элементы | 15px mono, uppercase, ls .05em, lh 1.55 |
+| Подписи фигур | 12px mono, uppercase, ls .1em |
+| Длинные тексты (learning-columns) | sans 16px, lh 1.7, обычный регистр — uppercase mono только для коротких подписей |
+| Минимум на странице | 11px (только футер); мобильные значения — не ниже 12.5px у текстовых элементов |
 
 ## Отступы и сетка
 
