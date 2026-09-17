@@ -108,11 +108,18 @@ function setup({ links = {}, readyState = 'complete', withDialog = true,
   return fixture;
 }
 
-test('classic links.js: ровно восемь ключей, все null', () => {
+test('classic links.js: ровно восемь ключей; registration задан, остальные null', () => {
   const context = { window: {} };
   vm.runInNewContext(configSource, context, { timeout: 1000 });
   assert.deepEqual(Object.keys(context.window.COURSE_LINKS).sort(), [...keys].sort());
-  for (const key of keys) assert.equal(context.window.COURSE_LINKS[key], null);
+  for (const key of keys) {
+    const value = context.window.COURSE_LINKS[key];
+    if (key === 'registration') {
+      assert.match(value, /^https:\/\//, 'registration должен быть https-URL');
+    } else {
+      assert.equal(value, null, `${key} пока должен быть null`);
+    }
+  }
 });
 
 test('HTTP(S) URL получают href, _blank и безопасный rel; клик не перехвачен', () => {
