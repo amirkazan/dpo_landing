@@ -1,2 +1,3 @@
 qa/
-async-trajectory-batch-saving/
+async-trajectory-batch-saving/.next/
+async-trajectory-batch-saving/node_modules/
