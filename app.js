@@ -232,6 +232,46 @@
     });
   }
 
+  // Count-up для цифр stats-ленты: в HTML уже стоят финальные значения,
+  // JS лишь анимирует от нуля при появлении (без JS числа видны сразу).
+  function applyCountUp(doc) {
+    if (typeof IntersectionObserver !== 'function' || prefersReducedMotion()) {
+      return;
+    }
+    var nums = doc.querySelectorAll('[data-countup]');
+    Array.prototype.forEach.call(nums, function (el) {
+      var target = parseInt(el.getAttribute('data-countup'), 10);
+      if (!isFinite(target)) {
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        if (!entries[0] || !entries[0].isIntersecting) {
+          return;
+        }
+        observer.disconnect();
+        var start = null;
+        var duration = 1400;
+        function step(now) {
+          if (start === null) {
+            start = now;
+          }
+          var p = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (p < 1 && typeof window.requestAnimationFrame === 'function') {
+            window.requestAnimationFrame(step);
+          } else {
+            el.textContent = String(target);
+          }
+        }
+        if (typeof window.requestAnimationFrame === 'function') {
+          window.requestAnimationFrame(step);
+        }
+      }, { threshold: 0.4 });
+      observer.observe(el);
+    });
+  }
+
   // Подсветка активного раздела в меню.
   function applyNavSpy(doc) {
     if (typeof IntersectionObserver !== 'function') {
@@ -283,6 +323,7 @@
     applyReveal(doc);
     applyScrollUI(doc);
     applyGifToggles(doc);
+    applyCountUp(doc);
     applyNavSpy(doc);
   }
 

@@ -16,6 +16,6 @@
     syllabus: null, // Программа курса (модули и занятия)
     presentation: null, // Презентация с описанием курса
     assessment: null, // Правила итоговой аттестации
-    integral: null // Программа «Интеграл»
+    integral: "https://int3-eight.vercel.app/" // Программа «Интеграл»
   };
 })();

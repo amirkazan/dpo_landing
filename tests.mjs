@@ -281,7 +281,7 @@ test('HTML: диалог, меню, секции и обычные якоря с
   }
 });
 
-test('HTML: links.js перед app.js, classic scripts без async', htmlOptions, () => {
+test('HTML: links.js перед app.js, classic scripts без async; hero — module', htmlOptions, () => {
   const scripts = tags.filter(({ tag }) => tag === 'script');
   const index = (name) => scripts.findIndex(({ attrs }) => attrs.src === name || attrs.src === `./${name}`);
   assert.ok(index('links.js') >= 0);
@@ -291,10 +291,66 @@ test('HTML: links.js перед app.js, classic scripts без async', htmlOptio
     assert.ok([undefined, '', 'text/javascript', 'application/javascript'].includes(attrs.type));
     assert.equal(Object.hasOwn(attrs, 'async'), false);
   }
+  const hero = scripts[index('hero-scene.js')];
+  assert.ok(hero, 'нет hero-scene.js');
+  assert.equal(hero.attrs.type, 'module', 'hero-scene.js должен быть type="module"');
 });
 
 test('HTML: непустое noscript-предупреждение', htmlOptions, () => {
   const notice = html.replace(/<!--[\s\S]*?-->/g, '').match(/<noscript\b[^>]*>([\s\S]*?)<\/noscript\s*>/i);
   assert.ok(notice, 'добавьте noscript в HTML');
   assert.ok(notice[1].replace(/<[^>]*>/g, '').trim(), 'noscript не должен быть пустым');
+});
+
+test('HTML: секция FAQ с details/summary и пункт меню «Вопросы»', htmlOptions, () => {
+  assert.equal(byId('faq')?.tag, 'section');
+  const faqItems = tags.filter(({ tag, attrs }) => tag === 'details' && (attrs.class || '').includes('faq-item'));
+  assert.ok(faqItems.length >= 5, 'должно быть минимум 5 вопросов');
+  assert.ok(tags.filter(({ tag }) => tag === 'summary').length >= faqItems.length,
+    'у каждого details должен быть summary');
+  assert.ok(tags.some(({ tag, attrs }) => tag === 'a' && attrs.href === '#faq' &&
+    !Object.hasOwn(attrs, 'data-resource')), 'в меню нет обычной ссылки #faq');
+});
+
+test('HTML: декоративные слои hero aria-hidden, canvas и fallback на месте', htmlOptions, () => {
+  const hero3d = tags.find(({ attrs }) => (attrs.class || '').split(' ').includes('hero-3d'));
+  assert.ok(hero3d, 'нет .hero-3d');
+  assert.equal(hero3d.attrs['aria-hidden'], 'true');
+  assert.ok(tags.some(({ tag, attrs }) => tag === 'canvas' && (attrs.class || '').includes('hero-canvas')),
+    'нет canvas hero-сцены');
+  assert.ok(tags.some(({ attrs }) => (attrs.class || '').includes('hero-fallback')),
+    'нет blueprint-grid fallback под canvas');
+  const ticker = tags.find(({ attrs }) => (attrs.class || '').split(' ').includes('ticker'));
+  assert.ok(ticker && ticker.attrs['aria-hidden'] === 'true', 'тикер должен быть aria-hidden');
+  for (const { attrs } of tags.filter(({ attrs }) => (attrs.class || '').includes('hero-vignette'))) {
+    assert.equal(attrs['aria-hidden'], 'true', 'hero-vignette без aria-hidden');
+  }
+});
+
+test('HTML: stats-лента рендерит финальные значения (count-up — только анимация)', htmlOptions, () => {
+  const nums = tags.filter(({ attrs }) => Object.hasOwn(attrs, 'data-countup'));
+  assert.ok(nums.length >= 4, 'ожидаются минимум 4 счётчика stats-ленты');
+  for (const { attrs } of nums) {
+    assert.match(attrs['data-countup'], /^\d+$/, 'data-countup должен быть целым числом');
+  }
+  // финальные значения видны в разметке без JS
+  const plain = html.replace(/<!--[\s\S]*?-->/g, '');
+  for (const value of ['144', '22']) {
+    const re = new RegExp(`data-countup="${value}"[^>]*>\\s*${value}\\s*<`, 'i');
+    assert.ok(re.test(plain), `финальное значение ${value} не отрендерено в HTML`);
+  }
+});
+
+test('HTML: GIF-панели сохраняют контракт паузы (постер + кнопка)', htmlOptions, () => {
+  const toggles = tags.filter(({ tag, attrs }) => tag === 'button' && Object.hasOwn(attrs, 'data-gif-toggle'));
+  assert.ok(toggles.length >= 3, 'должно быть минимум 3 кнопки паузы GIF');
+  for (const { attrs } of toggles) {
+    assert.equal(attrs['aria-pressed'], 'false');
+    assert.ok(attrs['aria-label'], 'кнопка паузы без aria-label');
+  }
+  const posters = tags.filter(({ tag, attrs }) => tag === 'img' && (attrs.class || '').includes('gif-poster'));
+  assert.equal(posters.length, toggles.length, 'у каждого GIF должен быть постер');
+  for (const { attrs } of posters) {
+    assert.ok(Object.hasOwn(attrs, 'hidden'), 'постер должен стартовать скрытым');
+  }
 });

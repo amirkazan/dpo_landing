@@ -73,10 +73,10 @@ try {
       'горизонтальное переполнение', width);
 
     // 2. Якорная навигация (инструкция заказчика)
-    await page.locator('.hero-actions a').first().click();
-    check(await page.evaluate(() => location.hash) === '#about', 'кнопка «Да, я впервые» не ведёт к #about', width);
-    await page.locator('.hero-actions a').nth(1).click();
-    check(await page.evaluate(() => location.hash) === '#materials', 'кнопка «Нет, я уже знаком» не ведёт к #materials', width);
+    await page.locator('.hero-actions a[href="#about"]').click();
+    check(await page.evaluate(() => location.hash) === '#about', 'кнопка «О курсе» не ведёт к #about', width);
+    await page.locator('.hero-actions a[href="#materials"]').click();
+    check(await page.evaluate(() => location.hash) === '#materials', 'кнопка «Материалы курса» не ведёт к #materials', width);
 
     // 3. Диалог незаполненной ссылки
     await page.locator('[data-resource="recordings"]').first().click();

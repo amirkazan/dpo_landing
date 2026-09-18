@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#030507">
+  <meta name="theme-color" content="#04070d">
   <meta name="description" content="Современные подходы к разработке систем ДЗЗ и космической связи. Программа Физтех-школы аэрокосмических технологий МФТИ: от орбитальной динамики до защиты собственного проекта.">
   <title>Современные подходы к разработке систем ДЗЗ и космической связи — МФТИ</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script src="links.js" defer></script>
   <script src="app.js" defer></script>
+  <script type="module" src="hero-scene.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -23,181 +24,291 @@
         <a href="#about">О курсе</a>
         <a href="#program">Программа</a>
         <a href="#materials">Материалы</a>
+        <a href="#faq">Вопросы</a>
       </nav>
       <a class="header-cta" href="#link-notice" data-resource="registration" data-label="Регистрация на курс">Записаться</a>
     </div>
   </header>
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="blob blob-hero-1" aria-hidden="true"></div>
-      <div class="blob blob-hero-2" aria-hidden="true"></div>
+    <section class="hero scanlines" id="top" aria-labelledby="hero-title">
+      <div class="hero-3d" aria-hidden="true">
+        <div class="hero-fallback blueprint-grid"></div>
+        <canvas class="hero-canvas"></canvas>
+      </div>
+      <div class="hero-vignette" aria-hidden="true"></div>
       <div class="container hero-layout">
-        <div class="hero-card glass" data-reveal>
-          <div class="hero-logos"><img src="assets/logo-kadry.webp" width="906" height="189" alt="Кадры для космоса"><img src="assets/logo-fakt.webp" width="357" height="134" alt="ФАКТ"></div>
-          <p class="mono-label">ДОПОЛНИТЕЛЬНОЕ ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАНИЕ</p>
-          <h1 id="hero-title">Современные подходы к&nbsp;разработке систем ДЗЗ и&nbsp;космической связи</h1>
-          <p class="hero-sub mono">Как научиться создавать спутниковые системы от идеи до защиты проекта?</p>
-          <p class="mono-label hero-question">Вы впервые здесь?</p>
+        <div class="hero-copy">
+          <p class="kicker">// ДОПОЛНИТЕЛЬНОЕ ПРОФЕССИОНАЛЬНОЕ ОБРАЗОВАНИЕ · МФТИ</p>
+          <h1 id="hero-title" class="hero-title">Современные подходы к&nbsp;разработке <span class="text-glow-mint">систем ДЗЗ и&nbsp;космической связи</span></h1>
+          <p class="hero-sub">Как научиться создавать спутниковые системы — от идеи до защиты собственного проекта перед экспертами отрасли.</p>
           <div class="hero-actions">
-            <a class="btn-pill btn-pill-bright" href="#about">Да, я впервые</a>
-            <a class="btn-pill btn-pill-ghost" href="#materials">Нет, я уже знаком с курсом</a>
+            <a class="btn btn-primary" href="#link-notice" data-resource="registration" data-label="Регистрация на курс">Зарегистрироваться →</a>
+            <a class="btn btn-ghost" href="#materials">Материалы курса ↗</a>
+            <a class="btn btn-ghost" href="#about">О курсе</a>
           </div>
         </div>
-        <div class="hero-visual" data-reveal>
-          <a class="btn-pill hero-register" href="#link-notice" data-resource="registration" data-label="Регистрация на курс">Зарегистрироваться</a>
-          <img class="hero-photo" src="assets/classroom.webp" alt="Занятие курса: участники моделируют спутниковые системы в программном комплексе «Интеграл»" width="1170" height="1633" fetchpriority="high">
+      </div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <div class="ticker-group">
+            <span class="ticker-item">144 часа · 5 модулей · 22 занятия<b>▚</b></span>
+            <span class="ticker-item">ПК «Интеграл» — моделирование миссий<b>▚</b></span>
+            <span class="ticker-item">Очно + онлайн<b>▚</b></span>
+            <span class="ticker-item">Финал — аванпроект перед экспертами отрасли<b>▚</b></span>
+            <span class="ticker-item">Орбитальная динамика → защита проекта<b>▚</b></span>
+          </div>
+          <div class="ticker-group">
+            <span class="ticker-item">144 часа · 5 модулей · 22 занятия<b>▚</b></span>
+            <span class="ticker-item">ПК «Интеграл» — моделирование миссий<b>▚</b></span>
+            <span class="ticker-item">Очно + онлайн<b>▚</b></span>
+            <span class="ticker-item">Финал — аванпроект перед экспертами отрасли<b>▚</b></span>
+            <span class="ticker-item">Орбитальная динамика → защита проекта<b>▚</b></span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="edu-banner" aria-labelledby="edu-title">
-      <div class="blob blob-edu-1" aria-hidden="true"></div>
-      <div class="blob blob-edu-2" aria-hidden="true"></div>
-      <img class="edu-sat edu-sat-blue" src="assets/satellite-blue.webp" width="1020" height="680" alt="Спутник дистанционного зондирования сканирует поверхность Земли" loading="lazy">
-      <img class="edu-sat edu-sat-gold" src="assets/satellite-gold.webp" width="1088" height="824" alt="Спутник с золотистой теплоизоляцией на орбите Земли" loading="lazy">
-      <div class="container edu-content" data-reveal>
-        <h2 id="edu-title">Современное прикладное образование</h2>
-        <p class="mono">Связь фундаментальных знаний со стремительно меняющимися потребностями настоящего</p>
+    <section class="stats-band" aria-label="Ключевые цифры программы">
+      <div class="container stats-grid">
+        <div class="stat">
+          <span class="stat-value"><span class="stat-num" data-countup="144">144</span></span>
+          <span class="stat-label">часа программы</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value"><span class="stat-num" data-countup="5">5</span></span>
+          <span class="stat-label">модулей</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value"><span class="stat-num" data-countup="22">22</span></span>
+          <span class="stat-label">занятия</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value"><span class="stat-num" data-countup="2">2</span></span>
+          <span class="stat-label">формата — очно и онлайн</span>
+        </div>
       </div>
     </section>
 
-    <section class="section skills-section" id="about" aria-labelledby="about-title">
+    <section class="edu-strip" aria-labelledby="edu-title">
+      <div class="container edu-inner">
+        <span class="edu-mark" aria-hidden="true">//</span>
+        <div>
+          <h2 id="edu-title" class="edu-title">Современное прикладное образование</h2>
+          <p class="edu-note">Связь фундаментальных знаний со стремительно меняющимися потребностями настоящего</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
       <div class="container">
-        <p class="kicker mono-label" data-reveal>01 — Чему вы научитесь</p>
+        <p class="kicker" data-reveal>// 01 · Чему вы научитесь</p>
         <h2 id="about-title" class="display" data-reveal>Чему вы научитесь?</h2>
-        <p class="mono-label">Три уровня навыков</p>
-        <div class="skills-layout">
-          <ol class="level-list">
-            <li class="pill-item" data-reveal>1. Фундамент — как устроены и&nbsp;работают космические системы</li>
-            <li class="pill-item" data-reveal>2. Инструменты — численное моделирование и&nbsp;проектирование в&nbsp;профессиональном&nbsp;ПО</li>
-            <li class="pill-item" data-reveal>3. Практика — разработка своего аванпроекта системы ДЗЗ или связи</li>
+        <p class="section-lead" data-reveal>Три уровня навыков — от фундамента до собственного аванпроекта.</p>
+        <div class="about-layout">
+          <ol class="pipeline-grid">
+            <li class="pipeline-card" data-reveal>
+              <span class="pipeline-num" aria-hidden="true">01</span>
+              <h3>Фундамент</h3>
+              <p>Как устроены и работают космические системы.</p>
+            </li>
+            <li class="pipeline-card" data-reveal>
+              <span class="pipeline-num" aria-hidden="true">02</span>
+              <h3>Инструменты</h3>
+              <p>Численное моделирование и проектирование в профессиональном ПО.</p>
+            </li>
+            <li class="pipeline-card" data-reveal>
+              <span class="pipeline-num" aria-hidden="true">03</span>
+              <h3>Практика</h3>
+              <p>Разработка своего аванпроекта системы ДЗЗ или связи.</p>
+            </li>
           </ol>
-          <img class="skills-photo" src="assets/lab-laptop.webp" width="1170" height="2080" alt="Лабораторная работа на ноутбуке: расчёт периодичности наблюдения цели в «Интеграле»" loading="lazy" data-reveal>
+          <figure class="panel-line corner-ticks about-photo" data-reveal>
+            <img src="assets/lab-laptop.webp" width="1170" height="2080" alt="Лабораторная работа на ноутбуке: расчёт периодичности наблюдения цели в «Интеграле»" loading="lazy">
+            <figcaption class="photo-caption">Лабораторная работа · ПК «Интеграл»</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="section program-section" id="program" aria-labelledby="program-title">
+    <section class="section section-hull" id="program" aria-labelledby="program-title">
       <div class="container">
-        <p class="kicker mono-label" data-reveal>02 — Программа</p>
+        <p class="kicker" data-reveal>// 02 · Программа</p>
         <h2 id="program-title" class="display" data-reveal>Что именно будем изучать?</h2>
-        <p class="mono program-sub">5 модулей, благодаря которым каждый сможет в&nbsp;финале сделать свой собственный проект</p>
-        <p class="stats-pill glass mono" data-reveal>144 часа • 5 модулей • 22 занятия</p>
-        <ol class="module-list">
-          <li class="pill-item glass">Орбитальная динамика</li>
-          <li class="pill-item glass">Проектирование космических систем и&nbsp;оценка эффективности</li>
-          <li class="pill-item glass">Устройство космического аппарата</li>
-          <li class="pill-item glass">Имитационное моделирование</li>
-          <li class="pill-item glass">Защита собственного проекта</li>
+        <p class="section-lead" data-reveal>5 модулей, благодаря которым каждый сможет в финале сделать свой собственный проект.</p>
+        <ol class="pipeline-grid program-grid">
+          <li class="pipeline-card" data-reveal>
+            <span class="pipeline-num" aria-hidden="true">01</span>
+            <h3>Орбитальная динамика</h3>
+          </li>
+          <li class="pipeline-card" data-reveal>
+            <span class="pipeline-num" aria-hidden="true">02</span>
+            <h3>Проектирование космических систем и оценка эффективности</h3>
+          </li>
+          <li class="pipeline-card" data-reveal>
+            <span class="pipeline-num" aria-hidden="true">03</span>
+            <h3>Устройство космического аппарата</h3>
+          </li>
+          <li class="pipeline-card" data-reveal>
+            <span class="pipeline-num" aria-hidden="true">04</span>
+            <h3>Имитационное моделирование</h3>
+          </li>
+          <li class="pipeline-card" data-reveal>
+            <span class="pipeline-num" aria-hidden="true">05</span>
+            <h3>Защита собственного проекта</h3>
+          </li>
         </ol>
-        <a class="mono-link" href="#link-notice" data-resource="syllabus" data-label="Полная программа курса">Ознакомиться с полной программой курса →</a>
+        <a class="mono-link" href="#link-notice" data-resource="syllabus" data-label="Полная программа курса">Полная программа курса →</a>
       </div>
     </section>
 
-    <section class="learning-band" id="learning" aria-labelledby="learning-title">
+    <section class="section" id="learning" aria-labelledby="learning-title">
       <div class="container">
-        <p class="kicker mono-label kicker-dark" data-reveal>03 — Формат</p>
+        <p class="kicker" data-reveal>// 03 · Формат</p>
         <h2 id="learning-title" class="display" data-reveal>Как проходит обучение?</h2>
-        <div class="learning-columns mono">
-          <p>2 пары в неделю в течение всего учебного года — чётко и без воды. Только прикладные знания и отработка материала при выполнении лабораторных работ.<br><span class="col-note">Семинары + лабораторные работы в связке</span></p>
-          <p>Работа в программном комплексе «Интеграл» — реальном инструменте для моделирования спутниковых миссий.<br><span class="col-note">Практика в профессиональном программном комплексе</span></p>
-          <p>Очный и онлайн форматы, записи занятий доступны всегда, на связи организаторы курса, преподаватели, а также другие участники программы.<br><span class="col-note">Выберите формат удобный лично для вас</span></p>
+        <div class="panel-row">
+          <article class="panel-line corner-ticks format-panel" data-reveal>
+            <h3 class="panel-tag">Семинары + лабораторные</h3>
+            <p>2 пары в неделю в течение всего учебного года — чётко и без воды. Только прикладные знания и отработка материала при выполнении лабораторных работ.</p>
+          </article>
+          <article class="panel-line corner-ticks format-panel" data-reveal>
+            <h3 class="panel-tag">Профессиональное ПО</h3>
+            <p>Работа в программном комплексе «Интеграл» — реальном инструменте для моделирования спутниковых миссий.</p>
+          </article>
+          <article class="panel-line corner-ticks format-panel" data-reveal>
+            <h3 class="panel-tag">Очно + онлайн</h3>
+            <p>Очный и онлайн форматы, записи занятий доступны всегда, на связи организаторы курса, преподаватели, а также другие участники программы.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section integral-section" aria-labelledby="integral-title">
+    <section class="section section-hull" id="integral" aria-labelledby="integral-title">
       <div class="container">
-        <p class="kicker mono-label" data-reveal>04 — Инструмент</p>
+        <p class="kicker" data-reveal>// 04 · Инструмент</p>
         <h2 id="integral-title" class="display" data-reveal>Что такое Интеграл?</h2>
         <div class="integral-layout">
           <div class="integral-copy">
-            <p class="mono glass integral-note">Программный комплекс «Интеграл» был разработан сотрудниками МФТИ и на данный момент является единственным в своём роде инструментом, позволяющим моделировать такой широкий спектр ситуаций</p>
-            <p class="integral-lead">От продвинутой баллистики до расчёта периодичности наблюдения цели — моделируйте ситуации, с которыми работают инженеры.</p>
+            <p class="panel-line integral-note" data-reveal>Программный комплекс «Интеграл» был разработан сотрудниками МФТИ и на данный момент является единственным в своём роде инструментом, позволяющим моделировать такой широкий спектр ситуаций.</p>
+            <p class="integral-lead" data-reveal>От продвинутой баллистики до расчёта периодичности наблюдения цели — моделируйте ситуации, с которыми работают инженеры.</p>
             <a class="mono-link" href="#link-notice" data-resource="integral" data-label="Программный комплекс «Интеграл»">Подробнее о программном комплексе →</a>
           </div>
-          <figure class="integral-figure" data-reveal>
+          <figure class="integral-figure panel-line corner-ticks" data-reveal>
             <img class="gif-anim" src="assets/integral-ballistics.gif" width="560" height="369" alt="Зацикленная запись «Интеграла»: орбита космического аппарата вокруг Земли" loading="lazy">
             <img class="gif-poster" src="assets/integral-ballistics-poster.webp" width="560" height="369" alt="" hidden>
-            <figcaption class="mono"><span class="status-dot"></span>Лабораторная работа «Продвинутая баллистика»</figcaption>
+            <figcaption class="fig-caption"><span class="status-dot"></span>Лабораторная работа «Продвинутая баллистика»</figcaption>
             <button class="gif-toggle" type="button" data-gif-toggle aria-pressed="false" aria-label="Поставить анимацию на паузу"><span class="gt-icon" aria-hidden="true"></span></button>
           </figure>
         </div>
         <div class="lab-grid">
-          <figure class="lab-card" data-reveal>
+          <figure class="lab-card panel-line corner-ticks" data-reveal>
             <img class="gif-anim" src="assets/integral-coverage.gif" width="560" height="369" alt="Зацикленная запись «Интеграла»: зоны наблюдения цели группировкой спутников" loading="lazy">
             <img class="gif-poster" src="assets/integral-coverage-poster.webp" width="560" height="369" alt="" hidden>
-            <figcaption class="mono"><span class="status-dot"></span>Лабораторная работа «Расчёт периодичности наблюдения цели»</figcaption>
+            <figcaption class="fig-caption"><span class="status-dot"></span>Лабораторная работа «Расчёт периодичности наблюдения цели»</figcaption>
             <button class="gif-toggle" type="button" data-gif-toggle aria-pressed="false" aria-label="Поставить анимацию на паузу"><span class="gt-icon" aria-hidden="true"></span></button>
           </figure>
-          <figure class="lab-card" data-reveal>
+          <figure class="lab-card panel-line corner-ticks" data-reveal>
             <img class="gif-anim" src="assets/integral-swaths.gif" width="560" height="369" alt="Зацикленная запись «Интеграла»: полосы обзора спутниковой группировки над территорией России" loading="lazy">
             <img class="gif-poster" src="assets/integral-swaths-poster.webp" width="560" height="369" alt="" hidden>
-            <figcaption class="mono"><span class="status-dot"></span>Моделирование полос обзора группировки</figcaption>
+            <figcaption class="fig-caption"><span class="status-dot"></span>Моделирование полос обзора группировки</figcaption>
             <button class="gif-toggle" type="button" data-gif-toggle aria-pressed="false" aria-label="Поставить анимацию на паузу"><span class="gt-icon" aria-hidden="true"></span></button>
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="section mission-section" aria-labelledby="mission-title">
+    <section class="section" id="mission" aria-labelledby="mission-title">
       <div class="container">
+        <p class="kicker" data-reveal>// 05 · Миссия</p>
         <h2 id="mission-title" class="display" data-reveal>Стань тем, кто сможет создать новую востребованную в&nbsp;России космическую систему!</h2>
-        <div class="mission-grid">
-          <article class="glass mission-card" data-reveal>
-            <h3 class="mono">Космос меняется на глазах</h3>
-            <p>Эпоха единичных спутников уходит. Сегодня в приоритете многоспутниковые системы и тот сервис, которые они могут предоставить для каждого</p>
+        <div class="panel-row">
+          <article class="panel-line corner-ticks mission-card" data-reveal>
+            <h3 class="panel-tag">Космос меняется на глазах</h3>
+            <p>Эпоха единичных спутников уходит. Сегодня в приоритете многоспутниковые системы и тот сервис, которые они могут предоставить для каждого.</p>
           </article>
-          <article class="glass mission-card" data-reveal>
-            <h3 class="mono">В чем наша миссия?</h3>
-            <p>Наша цель — научить вас проектировать реальный рабочий сервис, который в будущем будет на ежедневной основе доступен каждому</p>
+          <article class="panel-line corner-ticks mission-card" data-reveal>
+            <h3 class="panel-tag">В чем наша миссия?</h3>
+            <p>Наша цель — научить вас проектировать реальный рабочий сервис, который в будущем будет на ежедневной основе доступен каждому.</p>
           </article>
-          <article class="glass mission-card" data-reveal>
-            <h3 class="mono">Почему именно этот курс?</h3>
-            <p>Каждый модуль заканчивается практикой, а финал — защитой собственного аванпроекта перед практикующими экспертами отрасли. Не прослушанный курс, а готовый кейс в портфолио</p>
+          <article class="panel-line corner-ticks mission-card" data-reveal>
+            <h3 class="panel-tag">Почему именно этот курс?</h3>
+            <p>Каждый модуль заканчивается практикой, а финал — защитой собственного аванпроекта перед практикующими экспертами отрасли. Не прослушанный курс, а готовый кейс в портфолио.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section final-section" aria-labelledby="final-title">
-      <div class="container final-layout">
-        <p class="kicker mono-label" data-reveal>05 — Итог</p>
+    <section class="section section-hull" id="final" aria-labelledby="final-title">
+      <div class="container">
+        <p class="kicker" data-reveal>// 06 · Итог</p>
         <h2 id="final-title" class="display" data-reveal>Финал программы</h2>
-        <p class="pill-item glass mono final-pill" data-reveal>Ваш собственный проект — не учебная задача, а рабочий кейс</p>
+        <p class="section-lead" data-reveal>Ваш собственный проект — не учебная задача, а рабочий кейс.</p>
         <div class="outcomes">
           <h3 class="outcomes-title" data-reveal>Что вы получите?</h3>
           <ul class="outcome-list">
-            <li class="pill-item glass mono" data-reveal>Удостоверение о прохождении программы</li>
-            <li class="pill-item glass mono" data-reveal>Обратная связь от практикующих экспертов отрасли</li>
-            <li class="pill-item glass mono" data-reveal>Возможность карьерной консультации и стажировки в МФТИ и на предприятиях-партнёрах</li>
+            <li class="panel-line outcome-item" data-reveal><span class="outcome-idx" aria-hidden="true">01</span>Диплом о прохождении программы ДПО государственно образца</li>
+            <li class="panel-line outcome-item" data-reveal><span class="outcome-idx" aria-hidden="true">02</span>Обратная связь от практикующих экспертов отрасли</li>
+            <li class="panel-line outcome-item" data-reveal><span class="outcome-idx" aria-hidden="true">03</span>Возможность карьерной консультации и стажировки в МФТИ и на предприятиях-партнёрах</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="section materials-section" id="materials" aria-labelledby="materials-title">
+    <section class="section" id="materials" aria-labelledby="materials-title">
       <div class="container">
-        <p class="kicker mono-label" data-reveal>06 — Участникам курса</p>
+        <p class="kicker" data-reveal>// 07 · Участникам курса</p>
         <h2 id="materials-title" class="display" data-reveal>Все материалы курса тут</h2>
-        <div class="materials-list">
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="recordings" data-label="Видеозаписи лекций"><span class="pill-idx">01</span><span class="pill-text">Видеозаписи лекций с курса</span></a>
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="assignments" data-label="Задания по курсу"><span class="pill-idx">02</span><span class="pill-text">Задания по курсу</span></a>
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="guides" data-label="Методические материалы"><span class="pill-idx">03</span><span class="pill-text">Посмотреть все методички курса</span></a>
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="syllabus" data-label="Полная программа курса"><span class="pill-idx">04</span><span class="pill-text">Ознакомиться с полной программой курса</span></a>
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="presentation" data-label="Презентация курса"><span class="pill-idx">05</span><span class="pill-text">Презентация с описанием курса</span></a>
-          <a class="pill-item pill-link mono" href="#link-notice" data-resource="assessment" data-label="Правила итоговой аттестации"><span class="pill-idx">06</span><span class="pill-text">Правила итоговой аттестации</span></a>
+        <div class="materials-list" data-reveal>
+          <a class="mat-row" href="#link-notice" data-resource="recordings" data-label="Видеозаписи лекций"><span class="mat-idx">01</span><span class="mat-text">Видеозаписи лекций с курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#link-notice" data-resource="assignments" data-label="Задания по курсу"><span class="mat-idx">02</span><span class="mat-text">Задания по курсу</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#link-notice" data-resource="guides" data-label="Методические материалы"><span class="mat-idx">03</span><span class="mat-text">Посмотреть все методички курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#link-notice" data-resource="syllabus" data-label="Полная программа курса"><span class="mat-idx">04</span><span class="mat-text">Ознакомиться с полной программой курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#link-notice" data-resource="presentation" data-label="Презентация курса"><span class="mat-idx">05</span><span class="mat-text">Презентация с описанием курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#link-notice" data-resource="assessment" data-label="Правила итоговой аттестации"><span class="mat-idx">06</span><span class="mat-text">Правила итоговой аттестации</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Черновик FAQ: формулировки подтвердить у заказчика -->
+    <section class="section section-hull" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <p class="kicker" data-reveal>// 08 · Вопросы</p>
+        <h2 id="faq-title" class="display" data-reveal>Остались вопросы?</h2>
+        <div class="faq-list">
+          <details class="faq-item" data-reveal>
+            <summary>Кому подходит программа?</summary>
+            <p>Всем, кто хочет научиться проектировать системы ДЗЗ и космической связи. Опыт не обязателен: начинаем с фундамента — как устроены и работают космические системы — и доводим до собственного аванпроекта.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Сколько длится обучение?</summary>
+            <p>Весь учебный год: 2 пары в неделю, 144 часа, 5 модулей и 22 занятия. Семинары идут в связке с лабораторными работами.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Можно ли учиться онлайн?</summary>
+            <p>Да. Доступны очный и онлайн форматы, записи занятий остаются доступны всегда, а организаторы и преподаватели на связи в течение всей программы.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>На чём выполняются лабораторные работы?</summary>
+            <p>В программном комплексе «Интеграл», разработанном сотрудниками МФТИ: от продвинутой баллистики до расчёта периодичности наблюдения цели группировкой спутников.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Что я получу в финале?</summary>
+            <p>Диплом ДПО государственного образца, собственный аванпроект системы ДЗЗ или связи, обратную связь от практикующих экспертов отрасли и возможность карьерной консультации и стажировки в МФТИ и на предприятиях-партнёрах.</p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary>Как проходит итоговая аттестация?</summary>
+            <p>Финал программы — защита собственного проекта перед практикующими экспертами отрасли. Это не учебная задача, а рабочий кейс в портфолио.</p>
+          </details>
         </div>
       </div>
     </section>
 
     <section class="contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-layout">
-        <div class="contact-art glass" data-reveal><img src="assets/space-grid.webp" width="624" height="620" alt="" loading="lazy"></div>
-        <div class="contact-copy" data-reveal>
-          <h2 id="contact-title" class="display">Готовы спроектировать свою космическую систему?</h2>
-          <a class="btn-pill btn-pill-light" href="#link-notice" data-resource="registration" data-label="Регистрация на курс">зарегистрироваться</a>
-          <p class="mono contact-school">Физтех-школа аэрокосмических технологий<br><strong>МФТИ</strong></p>
+      <div class="container">
+        <div class="panel-line corner-ticks contact-panel blueprint-grid" data-reveal>
+          <p class="kicker">// 09 · Регистрация</p>
+          <h2 id="contact-title" class="display">Готовы спроектировать свою <span class="text-glow-mint">космическую систему?</span></h2>
+          <a class="btn btn-primary" href="#link-notice" data-resource="registration" data-label="Регистрация на курс">Зарегистрироваться →</a>
+          <p class="contact-school">Физтех-школа аэрокосмических технологий · <strong>МФТИ</strong></p>
         </div>
       </div>
     </section>
@@ -205,18 +316,18 @@
   <a class="to-top" href="#top" aria-label="Наверх">↑</a>
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="brand" href="#top" aria-label="Кадры для космоса — на главную"><img class="brand-logo" src="assets/logo-kadry.webp" width="906" height="189" alt="Кадры для космоса"></a>
-      <p class="mono">Современные подходы к разработке систем ДЗЗ и космической связи</p>
-      <a class="mono-link" href="#top">Наверх ↑</a>
+      <span>Кадры для космоса <b aria-hidden="true">×</b> ФАКТ·МФТИ — ДПО</span>
+      <span>ДЗЗ · Космическая связь</span>
+      <span class="footer-status"><span class="blink-dot" aria-hidden="true"></span>Приём на поток открыт</span>
     </div>
   </footer>
   <dialog id="link-notice" aria-labelledby="notice-title" aria-describedby="notice-description">
     <button class="dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button>
-    <span class="mono-label">МАТЕРИАЛЫ ПРОГРАММЫ</span>
+    <span class="kicker">// Материалы программы</span>
     <h2 id="notice-title">Ссылка пока не добавлена</h2>
     <p id="notice-description">Ссылка на этот раздел пока не опубликована. Она появится здесь, когда организаторы предоставят актуальный адрес.</p>
-    <button class="btn-pill" type="button" data-close-dialog>Понятно</button>
+    <button class="btn btn-primary" type="button" data-close-dialog>Понятно</button>
   </dialog>
-  <noscript><div class="noscript-notice mono">Навигация по сайту работает без JavaScript. Для открытия внешних материалов включите JavaScript. Адреса материалов и регистрации пока уточняются.</div></noscript>
+  <noscript><div class="noscript-notice">Навигация по сайту работает без JavaScript. Для открытия внешних материалов включите JavaScript. Адреса материалов курса пока уточняются.</div></noscript>
 </body>
 </html>
