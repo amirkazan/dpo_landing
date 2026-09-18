@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@theme {
+  --color-abyss: #04070d;
+  --color-hull: #080d16;
+  --color-panel: #0a1120;
+  --color-edge: #16233a;
+  --color-mist: #8fa3bf;
+  --color-ghost: #cdd8ea;
+  --color-ice: #eef4ff;
+  --color-mint: #3df5a6;
+  --color-cyan-glow: #45d8ff;
+  --color-amber-hot: #ffb454;
+  --color-rose-alert: #ff5c7a;
+
+  --font-display: var(--font-space-grotesk), var(--font-manrope), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", monospace;
+
+  --animate-spin-slow: spin 14s linear infinite;
+  --animate-ticker: ticker 32s linear infinite;
+  --animate-blink: blink 1.4s ease-in-out infinite;
+  --animate-drift: drift 9s ease-in-out infinite;
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+html {
+  background: var(--color-abyss);
+  scrollbar-color: #1c2c48 #04070d;
+}
+
+body {
+  background:
+    radial-gradient(1200px 500px at 75% -10%, rgba(69, 216, 255, 0.07), transparent 60%),
+    radial-gradient(900px 600px at 10% 110%, rgba(61, 245, 166, 0.05), transparent 55%),
+    var(--color-abyss);
+  color: var(--color-ghost);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(61, 245, 166, 0.85);
+  color: #04070d;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #04070d; }
+::-webkit-scrollbar-thumb {
+  background: #1c2c48;
+  border-radius: 8px;
+  border: 2px solid #04070d;
+}
+
+/* fine engineering grid used behind panels */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(140, 200, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140, 200, 255, 0.055) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* CRT scanline sweep for the hero */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(4, 7, 13, 0.22) 2px 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* film grain */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 7s steps(8) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -2%); }
+}
+
+.text-glow-mint {
+  text-shadow: 0 0 18px rgba(61, 245, 166, 0.45), 0 0 60px rgba(61, 245, 166, 0.18);
+}
+
+.panel-line {
+  border: 1px solid rgba(140, 200, 255, 0.1);
+  background: linear-gradient(180deg, rgba(13, 20, 35, 0.72), rgba(8, 13, 22, 0.82));
+  backdrop-filter: blur(10px);
+}
+
+.corner-ticks {
+  position: relative;
+}
+.corner-ticks::before,
+.corner-ticks::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(61, 245, 166, 0.6);
+  border-style: solid;
+}
+.corner-ticks::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.corner-ticks::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+}
+
+textarea.code-input {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  tab-size: 2;
+  caret-color: var(--color-mint);
+}
+textarea.code-input:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 1px rgba(61, 245, 166, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-blink,
+  .animate-drift,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+  .noise::before {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
