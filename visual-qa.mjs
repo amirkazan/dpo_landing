@@ -77,14 +77,38 @@ try {
     check(await page.evaluate(() => location.hash) === '#about', 'кнопка «О курсе» не ведёт к #about', width);
     await page.locator('.hero-actions a[href="#materials"]').click();
     check(await page.evaluate(() => location.hash) === '#materials', 'кнопка «Материалы курса» не ведёт к #materials', width);
+    // Дальнейшие шаги чувствительны к позиции скролла: выключаем smooth-scroll
+    // и гасим уже идущую анимацию якорного перехода.
+    await page.evaluate(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      scrollTo(0, scrollY);
+    });
 
     // 3. Диалог незаполненной ссылки
     await page.locator('[data-resource="recordings"]').first().click();
-    check(await page.locator('dialog').evaluate((el) => el.open), 'диалог не открылся', width);
+    check(await page.locator('dialog#link-notice').evaluate((el) => el.open), 'диалог не открылся', width);
     const dlgTitle = await page.locator('#notice-title').textContent();
     check(dlgTitle.includes('Видеозаписи'), 'диалог без data-label в заголовке', width);
     await page.keyboard.press('Escape');
-    check(!(await page.locator('dialog').evaluate((el) => el.open)), 'диалог не закрылся по Escape', width);
+    check(!(await page.locator('dialog#link-notice').evaluate((el) => el.open)), 'диалог не закрылся по Escape', width);
+
+    // 3.1. Просмотрщик программы: модальное окно с содержанием и кнопкой скачивания
+    await page.locator('a[data-syllabus]').first().click();
+    const syllabus = page.locator('dialog#syllabus-viewer');
+    check(await syllabus.evaluate((el) => el.open), 'диалог программы не открылся', width);
+    const modules = await syllabus.locator('.syllabus-module').count();
+    check(modules >= 5, 'в диалоге программы меньше 5 модулей', width);
+    const scrollBefore = await page.evaluate(() => scrollY);
+    await page.mouse.move(200, 450);
+    await page.mouse.wheel(0, 400);
+    await page.waitForTimeout(100);
+    check(await page.evaluate((y) => scrollY === y, scrollBefore),
+      'фон прокручивается колесом мыши при открытом диалоге программы', width);
+    const download = syllabus.locator('a[download]');
+    check(await download.getAttribute('href') === 'assets/programma-kursa.docx',
+      'кнопка скачивания не ведёт на DOCX', width);
+    await page.keyboard.press('Escape');
+    check(!(await syllabus.evaluate((el) => el.open)), 'диалог программы не закрылся по Escape', width);
 
     // 4. Мобильное меню
     if (width <= 800) {

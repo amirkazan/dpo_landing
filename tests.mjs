@@ -340,6 +340,24 @@ test('HTML: stats-лента рендерит финальные значени�
   }
 });
 
+test('HTML: просмотрщик программы — контент в диалоге и кнопка скачивания', htmlOptions, () => {
+  assert.equal(byId('syllabus-viewer')?.tag, 'dialog');
+  assert.ok(byId('syllabus-title'), 'нет заголовка диалога программы');
+  const modules = tags.filter(({ tag, attrs }) => tag === 'section' && (attrs.class || '').includes('syllabus-module'));
+  assert.ok(modules.length >= 5, 'в диалоге программы должно быть минимум 5 модулей');
+  const topics = tags.filter(({ tag, attrs }) => tag === 'li' && !attrs.class);
+  assert.ok(topics.length >= 25, 'в диалоге программы должны быть темы занятий');
+  const openers = tags.filter(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'data-syllabus'));
+  assert.ok(openers.length >= 2, 'должно быть минимум 2 ссылки на программу');
+  for (const { attrs } of openers) {
+    assert.equal(attrs.href, 'assets/programma-kursa.pdf', 'ссылка программы ведёт на локальный PDF (работает без JS)');
+    assert.ok(!Object.hasOwn(attrs, 'data-resource'), 'ссылка программы — не внешний ресурс');
+  }
+  const download = tags.find(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'download'));
+  assert.ok(download, 'нет кнопки скачивания файла программы');
+  assert.equal(download.attrs.href, 'assets/programma-kursa.docx');
+});
+
 test('HTML: GIF-панели сохраняют контракт паузы (постер + кнопка)', htmlOptions, () => {
   const toggles = tags.filter(({ tag, attrs }) => tag === 'button' && Object.hasOwn(attrs, 'data-gif-toggle'));
   assert.ok(toggles.length >= 3, 'должно быть минимум 3 кнопки паузы GIF');

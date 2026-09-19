@@ -239,13 +239,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .program-grid{grid-template-columns:1fr}
 .program-grid .pipeline-card{min-height:120px}
 
-/* ---------- панели (формат, миссия) ---------- */
+/* ---------- панели (формат) ---------- */
 .panel-row{display:grid;grid-template-columns:1fr;gap:18px;margin-top:44px}
-.format-panel,.mission-card{padding:28px 26px}
+.format-panel{padding:28px 26px}
 .panel-tag{
   font:700 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mint);
 }
-.format-panel p,.mission-card p{margin-top:14px;font-size:14.5px;line-height:1.7;color:var(--ghost)}
+.format-panel p{margin-top:14px;font-size:14.5px;line-height:1.7;color:var(--ghost)}
 
 /* ---------- интеграл ---------- */
 .integral-layout{display:grid;grid-template-columns:1fr;gap:28px;margin-top:44px;align-items:start}
@@ -355,14 +355,28 @@ html.js .to-top.is-visible{opacity:1;pointer-events:auto}
 html:not(.js) .to-top{display:none}
 
 /* ---------- диалог ---------- */
+html.dialog-open{overflow:hidden}
 dialog#link-notice{
   max-width:min(480px,calc(100% - 40px));padding:34px 30px;
   border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
 }
-dialog#link-notice::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
-dialog#link-notice .kicker{margin-bottom:14px}
-dialog#link-notice h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
+dialog#link-notice::backdrop,dialog#syllabus-viewer::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
+dialog#link-notice .kicker,dialog#syllabus-viewer .kicker{margin-bottom:14px}
+dialog#link-notice h2,dialog#syllabus-viewer h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
 dialog#link-notice p{margin:14px 0 26px;font-size:14px;line-height:1.7;color:var(--mist)}
+dialog#syllabus-viewer{
+  width:min(960px,calc(100% - 40px));max-width:calc(100% - 40px);padding:34px 30px;
+  border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
+}
+.syllabus-body{margin-top:18px;max-height:min(56vh,540px);overflow-y:auto;overscroll-behavior:contain;border:1px solid var(--edge);padding:4px 22px}
+.syllabus-module{padding:16px 0;border-bottom:1px solid var(--edge)}
+.syllabus-module:last-child{border-bottom:none}
+.syllabus-module h3{display:flex;gap:14px;align-items:baseline;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.01em;color:var(--ice)}
+.syllabus-num{font:700 12px var(--mono);letter-spacing:.12em;color:var(--mint)}
+.syllabus-topics{list-style:none;margin:10px 0 0;padding:0}
+.syllabus-topics li{display:flex;gap:14px;padding:8px 0;border-top:1px dashed rgba(140,200,255,.12);font-size:14px;line-height:1.6;color:var(--ghost)}
+.syllabus-topics li span{min-width:34px;padding-top:3px;font:11px var(--mono);color:var(--mist)}
+.syllabus-actions{margin-top:18px}
 .dialog-close{
   position:absolute;top:10px;right:10px;width:36px;height:36px;
   border:1px solid var(--edge);background:transparent;color:var(--mist);font-size:18px;line-height:1;

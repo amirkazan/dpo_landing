@@ -9,6 +9,7 @@
 
   var LINK_NOTICE_ID = 'link-notice';
   var NOTICE_TITLE_ID = 'notice-title';
+  var SYLLABUS_ID = 'syllabus-viewer';
   var MENU_TOGGLE_ID = 'menu-toggle';
   var NAV_ID = 'site-nav';
   var EXTERNAL_TARGET = '_blank';
@@ -78,34 +79,70 @@
     }
     if (!dialog.open) {
       dialog.showModal();
+      setScrollLock(document, true);
     }
     return true;
   }
 
-  function applyDialogControls(doc) {
-    var dialog = doc.getElementById(LINK_NOTICE_ID);
-    if (!dialog) {
-      return;
+  // Пока открыт модальный диалог, фон страницы не прокручивается:
+  // скролл остаётся только внутри содержимого окна.
+  function setScrollLock(doc, locked) {
+    var root = doc.documentElement;
+    if (root && root.classList && typeof root.classList.toggle === 'function') {
+      root.classList.toggle('dialog-open', locked);
     }
+  }
+
+  function applyDialogControls(doc) {
+    var linkNotice = doc.getElementById(LINK_NOTICE_ID);
+    var syllabus = doc.getElementById(SYLLABUS_ID);
 
     Array.prototype.forEach.call(doc.querySelectorAll('[data-close-dialog]'), function (button) {
       button.addEventListener('click', function () {
-        if (typeof dialog.close === 'function') {
-          dialog.close();
+        var parent = typeof button.closest === 'function' ? button.closest('dialog') : null;
+        var target = parent || linkNotice;
+        if (target && typeof target.close === 'function') {
+          target.close();
         }
       });
     });
 
     // Необязательное удобство: клик по подложке (backdrop) закрывает диалог.
-    dialog.addEventListener('click', function (event) {
-      if (event.target !== dialog || !dialog.open || typeof dialog.close !== 'function') {
+    Array.prototype.forEach.call([linkNotice, syllabus], function (dialog) {
+      if (!dialog || typeof dialog.addEventListener !== 'function') {
         return;
       }
-      var bounds = dialog.getBoundingClientRect();
-      if (event.clientX < bounds.left || event.clientX > bounds.right ||
-          event.clientY < bounds.top || event.clientY > bounds.bottom) {
-        dialog.close();
-      }
+      dialog.addEventListener('close', function () {
+        setScrollLock(doc, false);
+      });
+      dialog.addEventListener('click', function (event) {
+        if (event.target !== dialog || !dialog.open || typeof dialog.close !== 'function') {
+          return;
+        }
+        var bounds = dialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right ||
+            event.clientY < bounds.top || event.clientY > bounds.bottom) {
+          dialog.close();
+        }
+      });
+    });
+  }
+
+  // «Программа курса»: локальный PDF в модальном окне; без JS ссылка
+  // открывает PDF напрямую (нативный просмотрщик браузера).
+  function applySyllabusViewer(doc) {
+    var dialog = doc.getElementById(SYLLABUS_ID);
+    if (!dialog || typeof dialog.showModal !== 'function') {
+      return;
+    }
+    Array.prototype.forEach.call(doc.querySelectorAll('a[data-syllabus]'), function (link) {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (!dialog.open) {
+          dialog.showModal();
+          setScrollLock(doc, true);
+        }
+      });
     });
   }
 
@@ -319,6 +356,7 @@
     markJs(doc);
     applyResourceLinks(doc);
     applyDialogControls(doc);
+    applySyllabusViewer(doc);
     applyMenu(doc);
     applyReveal(doc);
     applyScrollUI(doc);
