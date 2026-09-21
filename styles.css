@@ -311,6 +311,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .mat-row:hover .mat-text{color:var(--mint)}
 .mat-arrow{margin-left:auto;color:rgba(143,163,191,.6);font-family:var(--mono);transition:color .25s}
 .mat-row:hover .mat-arrow{color:var(--mint)}
+.materials-note{margin-top:26px;max-width:62ch;font-size:13.5px;line-height:1.7;color:var(--mist)}
+.materials-note::before{content:"// ";font-family:var(--mono);color:var(--mint)}
 
 /* ---------- faq ---------- */
 .faq-list{margin-top:44px;display:grid;gap:12px}
@@ -330,6 +332,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 }
 .faq-item[open] summary::after{content:"−"}
 .faq-item p{padding:0 24px 22px;font-size:14.5px;line-height:1.7;color:var(--mist);max-width:70ch}
+.faq-points{margin:0;padding:2px 24px 20px 46px;font-size:14.5px;line-height:1.7;color:var(--mist);max-width:70ch}
+.faq-points li{padding:3px 0}
+.faq-points li::marker{color:var(--mint)}
 
 /* ---------- контакт ---------- */
 .contact-section{padding:96px 0 110px}
@@ -367,11 +372,11 @@ dialog#link-notice{
   max-width:min(480px,calc(100% - 40px));padding:34px 30px;
   border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
 }
-dialog#link-notice::backdrop,dialog#syllabus-viewer::backdrop,dialog#assessment-viewer::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
-dialog#link-notice .kicker,dialog#syllabus-viewer .kicker,dialog#assessment-viewer .kicker{margin-bottom:14px}
-dialog#link-notice h2,dialog#syllabus-viewer h2,dialog#assessment-viewer h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
+dialog#link-notice::backdrop,dialog#syllabus-viewer::backdrop,dialog#assessment-viewer::backdrop,dialog#labs-viewer::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
+dialog#link-notice .kicker,dialog#syllabus-viewer .kicker,dialog#assessment-viewer .kicker,dialog#labs-viewer .kicker{margin-bottom:14px}
+dialog#link-notice h2,dialog#syllabus-viewer h2,dialog#assessment-viewer h2,dialog#labs-viewer h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
 dialog#link-notice p{margin:14px 0 26px;font-size:14px;line-height:1.7;color:var(--mist)}
-dialog#syllabus-viewer,dialog#assessment-viewer{
+dialog#syllabus-viewer,dialog#assessment-viewer,dialog#labs-viewer{
   width:min(960px,calc(100% - 40px));max-width:calc(100% - 40px);padding:34px 30px;
   border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
 }

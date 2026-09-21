@@ -84,13 +84,12 @@ try {
       scrollTo(0, scrollY);
     });
 
-    // 3. Диалог незаполненной ссылки
-    await page.locator('[data-resource="recordings"]').first().click();
-    check(await page.locator('dialog#link-notice').evaluate((el) => el.open), 'диалог не открылся', width);
-    const dlgTitle = await page.locator('#notice-title').textContent();
-    check(dlgTitle.includes('Видеозаписи'), 'диалог без data-label в заголовке', width);
-    await page.keyboard.press('Escape');
-    check(!(await page.locator('dialog#link-notice').evaluate((el) => el.open)), 'диалог не закрылся по Escape', width);
+    // 3. Заполненные внешние ссылки: подмена href и безопасные атрибуты
+    // (link-notice сейчас не задействован: все data-resource на странице заполнены).
+    const reg = page.locator('[data-resource="registration"]').first();
+    check((await reg.getAttribute('href'))?.startsWith('https://'), 'ссылка регистрации не ведёт на HTTPS-адрес из links.js', width);
+    check(await reg.getAttribute('target') === '_blank', 'внешняя ссылка без target=_blank', width);
+    check((await reg.getAttribute('rel') || '').includes('noopener'), 'внешняя ссылка без rel=noopener', width);
 
     // 3.1. Просмотрщик программы: модальное окно с содержанием и кнопкой скачивания
     await page.locator('a[data-syllabus]').first().click();
@@ -121,6 +120,18 @@ try {
     }
     await page.keyboard.press('Escape');
     check(!(await assessment.evaluate((el) => el.open)), 'диалог аттестации не закрылся по Escape', width);
+
+    // 3.3. Вьювер лабораторных работ: модальное окно из строки 03 материалов
+    await page.locator('a[data-labs]').first().click();
+    const labs = page.locator('dialog#labs-viewer');
+    check(await labs.evaluate((el) => el.open), 'диалог лабораторных не открылся', width);
+    const labItems = await labs.locator('.syllabus-topics li').count();
+    check(labItems === 11, 'в диалоге лабораторных не 11 работ', width);
+    if (width === 1440) {
+      await page.screenshot({ path: join(outDir, 'dialog-labs.png') });
+    }
+    await page.keyboard.press('Escape');
+    check(!(await labs.evaluate((el) => el.open)), 'диалог лабораторных не закрылся по Escape', width);
 
     // 4. Мобильное меню
     if (width <= 800) {

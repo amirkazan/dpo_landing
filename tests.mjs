@@ -18,6 +18,7 @@ function matches(element, selector) {
     case '[data-close-dialog]': return element.getAttribute('data-close-dialog') !== null;
     case 'a[data-syllabus]': return element.tag === 'a' && element.getAttribute('data-syllabus') !== null;
     case 'a[data-assessment]': return element.tag === 'a' && element.getAttribute('data-assessment') !== null;
+    case 'a[data-labs]': return element.tag === 'a' && element.getAttribute('data-labs') !== null;
     default: return false; // неизвестные селекторы (новые фичи) — пустая выборка
   }
 }
@@ -395,6 +396,22 @@ test('HTML: правила итоговой аттестации — диало�
   for (const { attrs } of openers) {
     assert.equal(attrs.href, '#assessment-viewer');
     assert.ok(!Object.hasOwn(attrs, 'data-resource'), 'вьювер аттестации — не внешний ресурс');
+  }
+});
+
+test('HTML: лабораторные работы — диалог-вьювер со списком из 11 работ', htmlOptions, () => {
+  assert.equal(byId('labs-viewer')?.tag, 'dialog');
+  assert.ok(byId('labs-title'), 'нет заголовка диалога лабораторных');
+  const plain = html.replace(/<!--[\s\S]*?-->/g, '');
+  const dialogHtml = plain.match(/<dialog\b[^>]*id="labs-viewer"[^>]*>([\s\S]*?)<\/dialog\s*>/i);
+  assert.ok(dialogHtml, 'диалог лабораторных не найден в разметке');
+  const items = dialogHtml[1].match(/<li>/g) || [];
+  assert.equal(items.length, 11, 'в диалоге должно быть ровно 11 лабораторных работ');
+  const openers = tags.filter(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'data-labs'));
+  assert.ok(openers.length >= 1, 'строка 03 в материалах должна открывать диалог лабораторных');
+  for (const { attrs } of openers) {
+    assert.equal(attrs.href, '#labs-viewer');
+    assert.ok(!Object.hasOwn(attrs, 'data-resource'), 'вьювер лабораторных — не внешний ресурс');
   }
 });
 

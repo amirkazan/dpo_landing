@@ -235,19 +235,16 @@
     <section class="section section-hull" id="materials" aria-labelledby="materials-title">
       <div class="container">
         <p class="kicker" data-reveal>// 06 · Участникам курса</p>
-        <h2 id="materials-title" class="display" data-reveal>Все материалы курса тут</h2>
+        <h2 id="materials-title" class="display" data-reveal>Материалы</h2>
         <div class="materials-list" data-reveal>
-          <a class="mat-row" href="#link-notice" data-resource="recordings" data-label="Видеозаписи лекций"><span class="mat-idx">01</span><span class="mat-text">Видеозаписи лекций с курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="#link-notice" data-resource="assignments" data-label="Задания по курсу"><span class="mat-idx">02</span><span class="mat-text">Задания по курсу</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="#link-notice" data-resource="guides" data-label="Методические материалы"><span class="mat-idx">03</span><span class="mat-text">Посмотреть все методички курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="assets/programma-kursa.pdf" data-syllabus><span class="mat-idx">04</span><span class="mat-text">Ознакомиться с полной программой курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="#link-notice" data-resource="presentation" data-label="Презентация курса"><span class="mat-idx">05</span><span class="mat-text">Презентация с описанием курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="#assessment-viewer" data-assessment><span class="mat-idx">06</span><span class="mat-text">Правила итоговой аттестации</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#assessment-viewer" data-assessment><span class="mat-idx">01</span><span class="mat-text">Правила итоговой аттестации</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="assets/programma-kursa.pdf" data-syllabus><span class="mat-idx">02</span><span class="mat-text">Ознакомиться с полной программой курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#labs-viewer" data-labs><span class="mat-idx">03</span><span class="mat-text">Лабораторные работы</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
         </div>
+        <p class="materials-note" data-reveal>Доступ к материалам лекций, практических занятий, заданий и к программному комплексу для проведения расчётов можно получить после регистрации на курс.</p>
       </div>
     </section>
 
-    <!-- Черновик FAQ: формулировки подтвердить у заказчика -->
     <section class="section" id="faq" aria-labelledby="faq-title">
       <div class="container">
         <p class="kicker" data-reveal>// 07 · Вопросы</p>
@@ -255,11 +252,16 @@
         <div class="faq-list">
           <details class="faq-item" data-reveal>
             <summary>Кому подходит программа?</summary>
-            <p>Всем, кто хочет научиться проектировать системы ДЗЗ и космической связи. Опыт не обязателен: начинаем с фундамента — как устроены и работают космические системы — и доводим до собственного аванпроекта.</p>
+            <p><strong>Студентам</strong> <br>3–4 курса бакалавриата и 1–2 курса магистратуры технических и физико-математических направлений<br>
+            <strong>Сотрудникам и преподавателям вузов</strong><br>
+            Тем, кто работает или преподаёт в области приборостроения и космической техники<br>
+            <strong>Специалистам смежных отраслей</strong><br>
+            Инженерам и разработчикам, которым нужны системные знания в области многоспутниковых группировок<br><br>
+            В общем, всем, кто хочет научиться проектировать системы ДЗЗ и космической связи. Опыт не обязателен: начинаем с фундамента — как устроены и работают космические системы — и доводим до собственного аванпроекта.</p>
           </details>
           <details class="faq-item" data-reveal>
             <summary>Сколько длится обучение?</summary>
-            <p>Весь учебный год: 2 пары в неделю, 144 часа, 5 модулей и 22 занятия. Семинары идут в связке с лабораторными работами.</p>
+            <p>1 семестр: 2 пары в неделю, 144 часа, 5 модулей и 22 занятия. Семинары идут в связке с лабораторными работами.</p>
           </details>
           <details class="faq-item" data-reveal>
             <summary>Можно ли учиться онлайн?</summary>
@@ -397,6 +399,29 @@
           <li><span>09</span>Анализ и сравнение возможностей предложенной системы с существующими аналогами + расчёты (берём данные по НОРАД)</li>
         </ol>
         <p class="assess-note">Проекты рассматриваются заочно (только презентации, можно дополнительно приложить видео). Авторы лучших проектов приглашаются на очную или онлайн-защиту перед экспертным жюри и могут быть приглашены на стажировки в организации-партнёры.</p>
+      </section>
+    </div>
+  </dialog>
+  <dialog id="labs-viewer" aria-labelledby="labs-title">
+    <button class="dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button>
+    <span class="kicker">// Материалы курса</span>
+    <h2 id="labs-title">Список лабораторных работ</h2>
+    <div class="syllabus-body">
+      <section class="syllabus-module">
+        <h3><span class="syllabus-num">ЛР</span>Выполняются в программном комплексе «Интеграл»</h3>
+        <ol class="syllabus-topics">
+          <li><span>01</span>Оценка периодичности наблюдения точечных целей на разных широтах многоспутниковой ОГ ДЗЗ</li>
+          <li><span>02</span>Оценка времени покрытия площадного региона заданной группировкой ДЗЗ</li>
+          <li><span>03</span>Исследование сходимости задачи оценки времени покрытия площадного региона заданной группировкой ДЗЗ</li>
+          <li><span>04</span>Анализ влияния сезонности на эффективность оптико-электронных ОГ ДЗЗ</li>
+          <li><span>05</span>Оценка эффективности доставки данных ДЗЗ на Землю</li>
+          <li><span>06</span>Моделирование межспутниковой связи в плоскости</li>
+          <li><span>07</span>Моделирование спутниковых систем связи</li>
+          <li><span>08</span>Моделирование доставки данных ДЗЗ и абонентской связи в двухэшелонной космической системе</li>
+          <li><span>09</span>Применение имитационного моделирования космического аппарата при построении космической системы</li>
+          <li><span>10</span>Оценка состава наземного комплекса связи</li>
+          <li><span>11</span>Исследование баллистического существования и орбитальных маневров космического аппарата</li>
+        </ol>
       </section>
     </div>
   </dialog>

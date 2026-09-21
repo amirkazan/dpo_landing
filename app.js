@@ -11,6 +11,7 @@
   var NOTICE_TITLE_ID = 'notice-title';
   var SYLLABUS_ID = 'syllabus-viewer';
   var ASSESSMENT_ID = 'assessment-viewer';
+  var LABS_ID = 'labs-viewer';
   var MENU_TOGGLE_ID = 'menu-toggle';
   var NAV_ID = 'site-nav';
   var EXTERNAL_TARGET = '_blank';
@@ -98,6 +99,7 @@
     var linkNotice = doc.getElementById(LINK_NOTICE_ID);
     var syllabus = doc.getElementById(SYLLABUS_ID);
     var assessment = doc.getElementById(ASSESSMENT_ID);
+    var labs = doc.getElementById(LABS_ID);
 
     Array.prototype.forEach.call(doc.querySelectorAll('[data-close-dialog]'), function (button) {
       button.addEventListener('click', function () {
@@ -110,7 +112,7 @@
     });
 
     // Необязательное удобство: клик по подложке (backdrop) закрывает диалог.
-    Array.prototype.forEach.call([linkNotice, syllabus, assessment], function (dialog) {
+    Array.prototype.forEach.call([linkNotice, syllabus, assessment, labs], function (dialog) {
       if (!dialog || typeof dialog.addEventListener !== 'function') {
         return;
       }
@@ -131,7 +133,7 @@
   }
 
   // Модальные вьюверы материалов: «Программа курса» (без JS ссылка открывает
-  // PDF напрямую) и «Правила итоговой аттестации».
+  // PDF напрямую), «Правила итоговой аттестации» и «Лабораторные работы».
   function bindViewer(doc, attr, dialogId) {
     var dialog = doc.getElementById(dialogId);
     if (!dialog || typeof dialog.showModal !== 'function') {
@@ -360,6 +362,7 @@
     applyDialogControls(doc);
     bindViewer(doc, 'data-syllabus', SYLLABUS_ID);
     bindViewer(doc, 'data-assessment', ASSESSMENT_ID);
+    bindViewer(doc, 'data-labs', LABS_ID);
     applyMenu(doc);
     applyReveal(doc);
     applyScrollUI(doc);
