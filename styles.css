@@ -335,6 +335,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .faq-points{margin:0;padding:2px 24px 20px 46px;font-size:14.5px;line-height:1.7;color:var(--mist);max-width:70ch}
 .faq-points li{padding:3px 0}
 .faq-points li::marker{color:var(--mint)}
+.faq-item p strong{color:var(--ice);font-weight:600}
+.faq-item p br + strong{display:inline-block;margin-top:12px}
 
 /* ---------- контакт ---------- */
 .contact-section{padding:96px 0 110px}
