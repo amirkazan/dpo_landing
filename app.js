@@ -10,6 +10,7 @@
   var LINK_NOTICE_ID = 'link-notice';
   var NOTICE_TITLE_ID = 'notice-title';
   var SYLLABUS_ID = 'syllabus-viewer';
+  var ASSESSMENT_ID = 'assessment-viewer';
   var MENU_TOGGLE_ID = 'menu-toggle';
   var NAV_ID = 'site-nav';
   var EXTERNAL_TARGET = '_blank';
@@ -96,6 +97,7 @@
   function applyDialogControls(doc) {
     var linkNotice = doc.getElementById(LINK_NOTICE_ID);
     var syllabus = doc.getElementById(SYLLABUS_ID);
+    var assessment = doc.getElementById(ASSESSMENT_ID);
 
     Array.prototype.forEach.call(doc.querySelectorAll('[data-close-dialog]'), function (button) {
       button.addEventListener('click', function () {
@@ -108,7 +110,7 @@
     });
 
     // Необязательное удобство: клик по подложке (backdrop) закрывает диалог.
-    Array.prototype.forEach.call([linkNotice, syllabus], function (dialog) {
+    Array.prototype.forEach.call([linkNotice, syllabus, assessment], function (dialog) {
       if (!dialog || typeof dialog.addEventListener !== 'function') {
         return;
       }
@@ -128,14 +130,14 @@
     });
   }
 
-  // «Программа курса»: локальный PDF в модальном окне; без JS ссылка
-  // открывает PDF напрямую (нативный просмотрщик браузера).
-  function applySyllabusViewer(doc) {
-    var dialog = doc.getElementById(SYLLABUS_ID);
+  // Модальные вьюверы материалов: «Программа курса» (без JS ссылка открывает
+  // PDF напрямую) и «Правила итоговой аттестации».
+  function bindViewer(doc, attr, dialogId) {
+    var dialog = doc.getElementById(dialogId);
     if (!dialog || typeof dialog.showModal !== 'function') {
       return;
     }
-    Array.prototype.forEach.call(doc.querySelectorAll('a[data-syllabus]'), function (link) {
+    Array.prototype.forEach.call(doc.querySelectorAll('a[' + attr + ']'), function (link) {
       link.addEventListener('click', function (event) {
         event.preventDefault();
         if (!dialog.open) {
@@ -356,7 +358,8 @@
     markJs(doc);
     applyResourceLinks(doc);
     applyDialogControls(doc);
-    applySyllabusViewer(doc);
+    bindViewer(doc, 'data-syllabus', SYLLABUS_ID);
+    bindViewer(doc, 'data-assessment', ASSESSMENT_ID);
     applyMenu(doc);
     applyReveal(doc);
     applyScrollUI(doc);

@@ -242,7 +242,7 @@
           <a class="mat-row" href="#link-notice" data-resource="guides" data-label="Методические материалы"><span class="mat-idx">03</span><span class="mat-text">Посмотреть все методички курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
           <a class="mat-row" href="assets/programma-kursa.pdf" data-syllabus><span class="mat-idx">04</span><span class="mat-text">Ознакомиться с полной программой курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
           <a class="mat-row" href="#link-notice" data-resource="presentation" data-label="Презентация курса"><span class="mat-idx">05</span><span class="mat-text">Презентация с описанием курса</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
-          <a class="mat-row" href="#link-notice" data-resource="assessment" data-label="Правила итоговой аттестации"><span class="mat-idx">06</span><span class="mat-text">Правила итоговой аттестации</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
+          <a class="mat-row" href="#assessment-viewer" data-assessment><span class="mat-idx">06</span><span class="mat-text">Правила итоговой аттестации</span><span class="mat-arrow" aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
@@ -275,7 +275,7 @@
           </details>
           <details class="faq-item" data-reveal>
             <summary>Как проходит итоговая аттестация?</summary>
-            <p>Финал программы — защита собственного проекта перед практикующими экспертами отрасли. Это не учебная задача, а рабочий кейс в портфолио.</p>
+            <p>Для аттестации нужно выполнить не менее 30% лабораторных работ и пройти итоговое тестирование. А для оценки командой курса и выхода на конкурс — подготовить проект своей космической системы: презентация в PDF, доклад на 10 минут. Проекты рассматриваются заочно, авторы лучших приглашаются на защиту перед экспертным жюри. <a class="mono-link" href="#assessment-viewer" data-assessment>Правила итоговой аттестации →</a></p>
           </details>
         </div>
       </div>
@@ -354,7 +354,6 @@
         <ol class="syllabus-topics">
           <li><span>4.1</span>Имитационное моделирование работы КА</li>
           <li><span>4.2</span>Программы управления подсистемами КА</li>
-          <li><span>4.3</span>Имитационное моделирование работы КА</li>
         </ol>
       </section>
       <section class="syllabus-module">
@@ -363,6 +362,42 @@
     </div>
     <div class="syllabus-actions">
       <a class="btn btn-primary" href="assets/programma-kursa.docx" download="Программа курса.docx">Скачать программу (DOCX) ↓</a>
+    </div>
+  </dialog>
+  <dialog id="assessment-viewer" aria-labelledby="assessment-title">
+    <button class="dialog-close" type="button" data-close-dialog aria-label="Закрыть">×</button>
+    <span class="kicker">// Итоговая аттестация</span>
+    <h2 id="assessment-title">Правила итоговой аттестации</h2>
+    <div class="syllabus-body">
+      <section class="syllabus-module">
+        <h3><span class="syllabus-num">//</span>Для успешной аттестации</h3>
+        <ol class="syllabus-topics">
+          <li><span>01</span>Выполнить не менее 30% лабораторных работ</li>
+          <li><span>02</span>Пройти итоговое тестирование</li>
+        </ol>
+      </section>
+      <section class="syllabus-module">
+        <h3><span class="syllabus-num">//</span>Дополнительно — для оценки командой курса и выхода на конкурс</h3>
+        <ol class="syllabus-topics">
+          <li><span>03</span>Подготовить и прислать проект своей космической системы</li>
+        </ol>
+      </section>
+      <section class="syllabus-module">
+        <h3><span class="syllabus-num">//</span>Требования к итоговому проекту</h3>
+        <p class="assess-lead">Проект — предложение по созданию системы ДЗЗ/связи. Презентация проекта в формате PDF: доклад на 10 минут + слайды.</p>
+        <ol class="syllabus-topics">
+          <li><span>01</span>Обоснование требований к КС (через анализ потенциальных потребителей)</li>
+          <li><span>02</span>Обоснование орбитального построения для фиксированной высоты и характеристик ЦА + подтверждение расчётом*</li>
+          <li><span>03</span>Обоснование выбора высоты орбиты и характеристик ЦА (анализ других вариантов + выбор лучшего)</li>
+          <li><span>04</span>Анализ сходимости проведённых расчётов</li>
+          <li><span>05</span>Анализ возможности поддержания орбитального построения + расчёты</li>
+          <li><span>06</span>Выбор расположения наземных средств приёма информации + расчёты</li>
+          <li><span>07</span>Анализ эффективности применения межспутниковой связи + расчёты</li>
+          <li><span>08</span>Более глубокая проработка любой служебной подсистемы — СЭС, СОТР, СУДН и т.д.</li>
+          <li><span>09</span>Анализ и сравнение возможностей предложенной системы с существующими аналогами + расчёты (берём данные по НОРАД)</li>
+        </ol>
+        <p class="assess-note">Проекты рассматриваются заочно (только презентации, можно дополнительно приложить видео). Авторы лучших проектов приглашаются на очную или онлайн-защиту перед экспертным жюри и могут быть приглашены на стажировки в организации-партнёры.</p>
+      </section>
     </div>
   </dialog>
   <dialog id="link-notice" aria-labelledby="notice-title" aria-describedby="notice-description">

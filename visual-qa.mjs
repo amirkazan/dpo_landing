@@ -110,6 +110,18 @@ try {
     await page.keyboard.press('Escape');
     check(!(await syllabus.evaluate((el) => el.open)), 'диалог программы не закрылся по Escape', width);
 
+    // 3.2. Вьювер правил аттестации: модальное окно из строки 06 материалов
+    await page.locator('a[data-assessment]').first().click();
+    const assessment = page.locator('dialog#assessment-viewer');
+    check(await assessment.evaluate((el) => el.open), 'диалог аттестации не открылся', width);
+    const assessItems = await assessment.locator('.syllabus-topics li').count();
+    check(assessItems >= 12, 'в диалоге аттестации меньше 12 пунктов', width);
+    if (width === 1440) {
+      await page.screenshot({ path: join(outDir, 'dialog-assessment.png') });
+    }
+    await page.keyboard.press('Escape');
+    check(!(await assessment.evaluate((el) => el.open)), 'диалог аттестации не закрылся по Escape', width);
+
     // 4. Мобильное меню
     if (width <= 800) {
       await page.locator('#menu-toggle').click();

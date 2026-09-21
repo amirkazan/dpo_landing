@@ -16,6 +16,8 @@ function matches(element, selector) {
     case 'a[data-resource]':
       return element.tag === 'a' && element.getAttribute('data-resource') !== null;
     case '[data-close-dialog]': return element.getAttribute('data-close-dialog') !== null;
+    case 'a[data-syllabus]': return element.tag === 'a' && element.getAttribute('data-syllabus') !== null;
+    case 'a[data-assessment]': return element.tag === 'a' && element.getAttribute('data-assessment') !== null;
     default: return false; // неизвестные селекторы (новые фичи) — пустая выборка
   }
 }
@@ -244,6 +246,27 @@ test('инициализация откладывается до DOMContentLoade
   assert.equal(dialog.open, true);
 });
 
+test('вьювер аттестации: data-assessment открывает dialog и блокирует скролл', () => {
+  const { doc } = setup({
+    prepare({ doc }) {
+      const viewer = new Element('dialog', { id: 'assessment-viewer' });
+      viewer.open = false;
+      viewer.showModal = () => { viewer.open = true; };
+      viewer.close = () => { viewer.open = false; };
+      viewer.getBoundingClientRect = () => ({ left: 0, right: 500, top: 0, bottom: 500 });
+      const opener = new Element('a', { href: '#assessment-viewer', 'data-assessment': '' });
+      doc.append(viewer, opener);
+      doc.documentElement = new Element('html');
+      doc.viewer = viewer;
+      doc.opener = opener;
+    }
+  });
+  const viewer = doc.getElementById('assessment-viewer');
+  const event = doc.opener.dispatch('click');
+  assert.equal(event.defaultPrevented, true);
+  assert.equal(viewer.open, true);
+});
+
 let html;
 try {
   html = read('index.html');
@@ -356,6 +379,23 @@ test('HTML: просмотрщик программы — контент в ди
   const download = tags.find(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'download'));
   assert.ok(download, 'нет кнопки скачивания файла программы');
   assert.equal(download.attrs.href, 'assets/programma-kursa.docx');
+});
+
+test('HTML: правила итоговой аттестации — диалог-вьювер из материалов 06', htmlOptions, () => {
+  assert.equal(byId('assessment-viewer')?.tag, 'dialog');
+  assert.ok(byId('assessment-title'), 'нет заголовка диалога аттестации');
+  const plain = html.replace(/<!--[\s\S]*?-->/g, '');
+  const dialogHtml = plain.match(/<dialog\b[^>]*id="assessment-viewer"[^>]*>([\s\S]*?)<\/dialog\s*>/i);
+  assert.ok(dialogHtml, 'диалог аттестации не найден в разметке');
+  for (const marker of ['30% лабораторных', 'итоговое тестирование', 'НОРАД', 'экспертным жюри']) {
+    assert.ok(dialogHtml[1].includes(marker), `в диалоге аттестации нет «${marker}»`);
+  }
+  const openers = tags.filter(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'data-assessment'));
+  assert.ok(openers.length >= 1, 'строка 06 в материалах должна открывать диалог аттестации');
+  for (const { attrs } of openers) {
+    assert.equal(attrs.href, '#assessment-viewer');
+    assert.ok(!Object.hasOwn(attrs, 'data-resource'), 'вьювер аттестации — не внешний ресурс');
+  }
 });
 
 test('HTML: GIF-панели сохраняют контракт паузы (постер + кнопка)', htmlOptions, () => {

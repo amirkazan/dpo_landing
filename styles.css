@@ -288,6 +288,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 }
 .outcome-idx{font:700 13px var(--mono);color:var(--mint);flex:none}
 
+/* ---------- правила итоговой аттестации (диалог) ---------- */
+.assess-lead{margin-top:12px;font-size:14px;line-height:1.7;color:var(--ghost)}
+.assess-note{
+  margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--edge);
+  font-size:13px;line-height:1.7;color:var(--mist);
+}
+
 /* ---------- материалы ---------- */
 .materials-list{margin-top:44px;border-top:1px solid rgba(22,35,58,.6)}
 .mat-row{
@@ -360,11 +367,11 @@ dialog#link-notice{
   max-width:min(480px,calc(100% - 40px));padding:34px 30px;
   border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
 }
-dialog#link-notice::backdrop,dialog#syllabus-viewer::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
-dialog#link-notice .kicker,dialog#syllabus-viewer .kicker{margin-bottom:14px}
-dialog#link-notice h2,dialog#syllabus-viewer h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
+dialog#link-notice::backdrop,dialog#syllabus-viewer::backdrop,dialog#assessment-viewer::backdrop{background:rgba(4,7,13,.72);backdrop-filter:blur(4px)}
+dialog#link-notice .kicker,dialog#syllabus-viewer .kicker,dialog#assessment-viewer .kicker{margin-bottom:14px}
+dialog#link-notice h2,dialog#syllabus-viewer h2,dialog#assessment-viewer h2{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;color:var(--ice);text-transform:none}
 dialog#link-notice p{margin:14px 0 26px;font-size:14px;line-height:1.7;color:var(--mist)}
-dialog#syllabus-viewer{
+dialog#syllabus-viewer,dialog#assessment-viewer{
   width:min(960px,calc(100% - 40px));max-width:calc(100% - 40px);padding:34px 30px;
   border:1px solid rgba(140,200,255,.18);background:var(--panel);color:var(--ghost);
 }
