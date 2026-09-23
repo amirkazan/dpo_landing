@@ -399,14 +399,14 @@ test('HTML: правила итоговой аттестации — диало�
   }
 });
 
-test('HTML: лабораторные работы — диалог-вьювер со списком из 11 работ', htmlOptions, () => {
+test('HTML: лабораторные работы — диалог-вьювер со списком из 14 работ', htmlOptions, () => {
   assert.equal(byId('labs-viewer')?.tag, 'dialog');
   assert.ok(byId('labs-title'), 'нет заголовка диалога лабораторных');
   const plain = html.replace(/<!--[\s\S]*?-->/g, '');
   const dialogHtml = plain.match(/<dialog\b[^>]*id="labs-viewer"[^>]*>([\s\S]*?)<\/dialog\s*>/i);
   assert.ok(dialogHtml, 'диалог лабораторных не найден в разметке');
   const items = dialogHtml[1].match(/<li>/g) || [];
-  assert.equal(items.length, 11, 'в диалоге должно быть ровно 11 лабораторных работ');
+  assert.equal(items.length, 14, 'в диалоге должно быть ровно 14 лабораторных работ');
   const openers = tags.filter(({ tag, attrs }) => tag === 'a' && Object.hasOwn(attrs, 'data-labs'));
   assert.ok(openers.length >= 1, 'строка 03 в материалах должна открывать диалог лабораторных');
   for (const { attrs } of openers) {

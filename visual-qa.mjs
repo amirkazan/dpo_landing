@@ -126,7 +126,7 @@ try {
     const labs = page.locator('dialog#labs-viewer');
     check(await labs.evaluate((el) => el.open), 'диалог лабораторных не открылся', width);
     const labItems = await labs.locator('.syllabus-topics li').count();
-    check(labItems === 11, 'в диалоге лабораторных не 11 работ', width);
+    check(labItems === 14, 'в диалоге лабораторных не 14 работ', width);
     if (width === 1440) {
       await page.screenshot({ path: join(outDir, 'dialog-labs.png') });
     }

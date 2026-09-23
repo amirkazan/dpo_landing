@@ -390,6 +390,9 @@ dialog#syllabus-viewer,dialog#assessment-viewer,dialog#labs-viewer{
 .syllabus-topics{list-style:none;margin:10px 0 0;padding:0}
 .syllabus-topics li{display:flex;gap:14px;padding:8px 0;border-top:1px dashed rgba(140,200,255,.12);font-size:14px;line-height:1.6;color:var(--ghost)}
 .syllabus-topics li span{min-width:34px;padding-top:3px;font:11px var(--mono);color:var(--mist)}
+.lab-topics li{align-items:baseline}
+.lab-name{display:block;font-weight:600;color:var(--ice)}
+.lab-desc{margin:4px 0 0;font-size:13px;line-height:1.55;color:var(--mist)}
 .syllabus-actions{margin-top:18px}
 .dialog-close{
   position:absolute;top:10px;right:10px;width:36px;height:36px;
